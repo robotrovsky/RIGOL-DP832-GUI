@@ -840,7 +840,7 @@ class DP832(QMainWindow):
         mainLayout.addWidget(main_lbl_ipaddr,1,1)
 
         self.main_le_ipaddr = QLineEdit()
-        self.main_le_ipaddr.setText("192.168.134.193")
+        self.main_le_ipaddr.setText("172.16.154.198")
         mainLayout.addWidget(self.main_le_ipaddr,1,2)
 
         self.main_btn_connect = QPushButton('Connect', self)
@@ -1770,12 +1770,12 @@ class DP832(QMainWindow):
     def main_connect(self):
         #visa.log_to_screen()
         try: 
-            self.main_rigol_rm = visa.ResourceManager()
+            self.main_rigol_rm = visa.ResourceManager('@py')
         except Exception as ex:
             self.showWarning("from ResourceManager", str(ex))
             print(ex)
             return
-        if self.main_rigol_rm.last_status == 0:
+        if True: #self.main_rigol_rm.last_status == 0:
             self.main_rigol_hosting = "TCPIP::" + self.main_le_ipaddr.text() + "::inst0::INSTR"
             try:
                 self.main_rigol_inst = self.main_rigol_rm.open_resource(self.main_rigol_hosting)
